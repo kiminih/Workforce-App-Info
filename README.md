@@ -15,3 +15,6 @@
 
 ## 更新样式后重新部署
 修改完 `index.html` 等文件后，重新推送到 GitHub。GitHub Pages 会自动检测到新的提交并在几分钟内完成重新部署，然后即可在同一链接查看更新后的页面。
+
+## 许可协议
+本项目使用 MIT License，详见 [LICENSE](LICENSE) 文件。
