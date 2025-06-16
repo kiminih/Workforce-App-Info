@@ -12,3 +12,6 @@
    `https://<你的 GitHub 用户名>.github.io/Workforce-App-Info/`
 
 将 `<你的 GitHub 用户名>` 替换为自己的用户名，即可查看部署好的页面。
+
+## 更新样式后重新部署
+修改完 `index.html` 等文件后，重新推送到 GitHub。GitHub Pages 会自动检测到新的提交并在几分钟内完成重新部署，然后即可在同一链接查看更新后的页面。
