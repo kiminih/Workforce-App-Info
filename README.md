@@ -4,6 +4,7 @@
 
 ## 通过 GitHub Pages 使用 "Deploy from a branch" 部署
 
+- Day.js 1.11.10
 1. 将此仓库推送到自己的 GitHub 账号。
 2. 打开仓库 **Settings**，进入 **Pages** 页面。
 3. 在 **Source** 处选择 **Deploy from a branch**，并指定保存代码的分支（通常是 `main`）。
