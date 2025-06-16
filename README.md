@@ -23,6 +23,10 @@
 - React 18.2.0
 - React DOM 18.2.0
 - Ant Design 5.11.0
+<<<<<<< zl3ft6-codex/update-cdn-urls-and-document-versions
+- Day.js 1.11.10
+=======
+>>>>>>> main
 
 如需升级依赖，请同步修改 `index.html` 和此处列出的版本号。
 
