@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>智办助手 - 企业办公AI应用详情</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd@5.11.0/dist/reset.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd@5.11.0/dist/antd.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/antd@5.11.0/dist/antd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.umd.js"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body>
+<body class="bg-black">
   <div id="root"></div>
   <script>
-    const { Layout, Typography, List } = antd;
-    const { Header, Content, Footer } = Layout;
-    const { Title, Paragraph, Link } = Typography;
-
+    const { motion } = window['framer-motion'];
     const steps = [
       "通过公司提供的访问链接进入登录页面。",
       "使用公司邮箱或分配的账号进行登录。",
@@ -27,35 +24,79 @@
       "如需获取数据报告或分析结果，可在\"智能分析\"模块选择所需的报表模板并生成。",
     ];
 
+    function ChartComponent() {
+      React.useEffect(() => {
+        const ctx = document.getElementById('usageChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+            datasets: [{
+              label: 'Active Users',
+              data: [120,150,170,160,180,190,200],
+              borderColor: 'rgba(227,25,55,0.8)',
+              backgroundColor: 'rgba(227,25,55,0.2)',
+              tension: 0.3
+            }]
+          },
+          options: {
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { ticks: { color: '#ffffff' } },
+              x: { ticks: { color: '#ffffff' } }
+            }
+          }
+        });
+      }, []);
+      return React.createElement('canvas', { id: 'usageChart', className: 'w-full h-40' });
+    }
+
+    const Section = ({ children, className }) => (
+      React.createElement(motion.section, {
+        className: `p-6 border border-red-600/50 rounded-xl bg-gray-900/40 backdrop-blur-sm ${className || ''}`,
+        initial: { opacity: 0, y: 50 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.6 }
+      }, children)
+    );
+
     const App = () => (
-      React.createElement(Layout, {style: {minHeight: '100vh'}},
-        React.createElement(Header, {style: {background: '#1677ff'}},
-          React.createElement(Title, {level:3, style: {color: '#fff', margin: 0}}, '企业办公AI应用详情')
+      React.createElement('main', { className: 'min-h-screen text-white p-4 space-y-6' },
+        React.createElement('header', { className: 'text-center py-20' },
+          React.createElement('h1', { className: 'text-5xl md:text-7xl font-extrabold mb-2 text-[#E31937]' }, '智办助手'),
+          React.createElement('p', { className: 'text-xl tracking-widest text-gray-300' }, 'SmartWork Assistant')
         ),
-        React.createElement(Content, {style:{padding: '24px'}},
-          React.createElement(Title, {level:4}, '应用名称'),
-          React.createElement(Paragraph, null, '智办助手（SmartWork Assistant）'),
-
-          React.createElement(Title, {level:4}, '应用描述'),
-          React.createElement(Paragraph, null,
-            '智办助手是一款为企业量身打造的人工智能办公应用，旨在提高团队协作效率和自动化处理日常事务。',
-            '它整合日程管理、文档协作和智能分析等功能，可与现有的办公软件无缝衔接，帮助员工在一个统一的平台上完成任务。'
+        React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-6' },
+          React.createElement(Section, null,
+            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '应用描述'),
+            React.createElement('p', { className: 'text-lg leading-relaxed text-gray-300' },
+              '智办助手是一款为企业量身打造的人工智能办公应用，旨在提高团队协作效率和自动化处理日常事务。它整合日程管理、文档协作和智能分析等功能，可与现有的办公软件无缝衔接，帮助员工在一个统一的平台上完成任务。'
+            )
           ),
-
-          React.createElement(Title, {level:4}, '如何使用'),
-          React.createElement(List, {dataSource: steps, renderItem: (item) => React.createElement(List.Item, null, item)}),
-
-          React.createElement(Title, {level:4}, '管理员名称'),
-          React.createElement(Paragraph, null, '陈主管（Supervisor Chen）'),
-
-          React.createElement(Title, {level:4}, '使用链接'),
-          React.createElement(Paragraph, null,
-            React.createElement(Link, {href: 'https://office-ai.example.com', target: '_blank'}, 'https://office-ai.example.com')
+          React.createElement(Section, null,
+            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '使用步骤'),
+            React.createElement('ul', { className: 'list-disc pl-5 space-y-1 text-lg text-gray-300' },
+              steps.map((s, i) => React.createElement('li', { key: i }, s))
+            )
           ),
-
-          React.createElement(Paragraph, null, '更多帮助文档和常见问题，可访问应用内部的\"帮助中心\"，或联系管理员获取支持。')
+          React.createElement(Section, null,
+            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '管理员'),
+            React.createElement('div', { className: 'flex items-center space-x-2 text-lg text-gray-300' },
+              React.createElement('i', { className: 'fas fa-user-tie text-[#E31937]' }),
+              React.createElement('span', null, '陈主管 (Supervisor Chen)')
+            )
+          ),
+          React.createElement(Section, null,
+            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '访问链接'),
+            React.createElement('a', { href: 'https://office-ai.example.com', target: '_blank', className: 'text-[#E31937] underline' }, 'https://office-ai.example.com')
+          ),
+          React.createElement(Section, { className: 'md:col-span-2 flex flex-col items-center' },
+            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '使用数据'),
+            React.createElement(ChartComponent)
+          )
         ),
-        React.createElement(Footer, {style:{textAlign:'center'}}, '智办助手')
+        React.createElement('footer', { className: 'text-center py-6 text-gray-500 text-sm' }, '© 2025 智办助手')
       )
     );
 
