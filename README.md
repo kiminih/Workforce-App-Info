@@ -7,7 +7,7 @@
 2. 打开仓库 **Settings**，进入 **Pages** 页面。
 3. 在 **Source** 处选择 **Deploy from a branch**，并指定保存代码的分支（通常是 `main`）。
 4. 保存设置后，等待 GitHub Pages 显示 **Your site is published**。
-5. 之后即可访问：
+5. 之后即可访问：  
 
    `https://<你的 GitHub 用户名>.github.io/Workforce-App-Info/`
 
@@ -16,16 +16,6 @@
 ## 更新样式后重新部署
 修改完 `index.html` 等文件后，重新推送到 GitHub。GitHub Pages 会自动检测到新的提交并在几分钟内完成重新部署，然后即可在同一链接查看更新后的页面。
 
-## CDN 版本信息
-
-`index.html` 使用以下 CDN 版本：
-
-- React 18.2.0
-- React DOM 18.2.0
-- Ant Design 5.11.0
-- Day.js 1.11.10
-
-如需升级依赖，请同步修改 `index.html` 和此处列出的版本号。
-
-## 许可协议
-本项目使用 MIT License，详见 [LICENSE](LICENSE) 文件。
+## 在本地预览
+如果直接打开 `index.html` 发现控制台报错 "dayjs is not defined"，请确认已经通过 CDN 引入了 `dayjs` 脚本。此库由 Ant Design 依赖，用于处理日期时间功能。
+同时确保在 `index.html` 中先引入 `dayjs`，再引入 `antd` 脚本，以避免报错。
