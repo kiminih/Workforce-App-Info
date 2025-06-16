@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>智办助手 - 企业办公AI应用详情</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd/dist/antd.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/antd/dist/antd.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const { Layout, Typography, List } = antd;
+    const { Header, Content, Footer } = Layout;
+    const { Title, Paragraph, Link } = Typography;
+
+    const steps = [
+      "通过公司提供的访问链接进入登录页面。",
+      "使用公司邮箱或分配的账号进行登录。",
+      "登录后，可在首页查看待办事项、团队公告及最新项目进展。",
+      "在\"文档协作\"模块上传或创建文档，实时与同事协作编辑。",
+      "在\"日程管理\"模块中添加会议或提醒，系统会自动同步到个人日历。",
+      "如需获取数据报告或分析结果，可在\"智能分析\"模块选择所需的报表模板并生成。",
+    ];
+
+    const App = () => (
+      React.createElement(Layout, {style: {minHeight: '100vh'}},
+        React.createElement(Header, {style: {background: '#1677ff'}},
+          React.createElement(Title, {level:3, style: {color: '#fff', margin: 0}}, '企业办公AI应用详情')
+        ),
+        React.createElement(Content, {style:{padding: '24px'}},
+          React.createElement(Title, {level:4}, '应用名称'),
+          React.createElement(Paragraph, null, '智办助手（SmartWork Assistant）'),
+
+          React.createElement(Title, {level:4}, '应用描述'),
+          React.createElement(Paragraph, null,
+            '智办助手是一款为企业量身打造的人工智能办公应用，旨在提高团队协作效率和自动化处理日常事务。',
+            '它整合日程管理、文档协作和智能分析等功能，可与现有的办公软件无缝衔接，帮助员工在一个统一的平台上完成任务。'
+          ),
+
+          React.createElement(Title, {level:4}, '如何使用'),
+          React.createElement(List, {dataSource: steps, renderItem: (item) => React.createElement(List.Item, null, item)}),
+
+          React.createElement(Title, {level:4}, '管理员名称'),
+          React.createElement(Paragraph, null, '陈主管（Supervisor Chen）'),
+
+          React.createElement(Title, {level:4}, '使用链接'),
+          React.createElement(Paragraph, null,
+            React.createElement(Link, {href: 'https://office-ai.example.com', target: '_blank'}, 'https://office-ai.example.com')
+          ),
+
+          React.createElement(Paragraph, null, '更多帮助文档和常见问题，可访问应用内部的\"帮助中心\"，或联系管理员获取支持。')
+        ),
+        React.createElement(Footer, {style:{textAlign:'center'}}, '智办助手')
+      )
+    );
+
+    ReactDOM.render(React.createElement(App), document.getElementById('root'));
+  </script>
+</body>
+</html>
