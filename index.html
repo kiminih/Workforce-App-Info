@@ -1,106 +1,86 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>智办助手 - 企业办公AI应用详情</title>
-  <script src="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.18.0/dist/framer-motion.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-</head>
-<body class="bg-black">
-  <div id="root"></div>
-  <script>
-    const { motion } = window.Motion;
-    const steps = [
-      "通过公司提供的访问链接进入登录页面。",
-      "使用公司邮箱或分配的账号进行登录。",
-      "登录后，可在首页查看待办事项、团队公告及最新项目进展。",
-      "在\"文档协作\"模块上传或创建文档，实时与同事协作编辑。",
-      "在\"日程管理\"模块中添加会议或提醒，系统会自动同步到个人日历。",
-      "如需获取数据报告或分析结果，可在\"智能分析\"模块选择所需的报表模板并生成。",
-    ];
-
-    function ChartComponent() {
-      React.useEffect(() => {
-        const ctx = document.getElementById('usageChart').getContext('2d');
-        new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
-            datasets: [{
-              label: 'Active Users',
-              data: [120,150,170,160,180,190,200],
-              borderColor: 'rgba(227,25,55,0.8)',
-              backgroundColor: 'rgba(227,25,55,0.2)',
-              tension: 0.3
-            }]
-          },
-          options: {
-            plugins: { legend: { display: false } },
-            scales: {
-              y: { ticks: { color: '#ffffff' } },
-              x: { ticks: { color: '#ffffff' } }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bento Grid Page</title>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'tesla-red': '#E31937',
+            },
+            boxShadow: {
+              'glow-tesla-red': 'inset 0 0 10px 2px #E31937',
+              'glow-tesla-red-light': 'inset 0 0 15px 5px rgba(227, 25, 55, 0.5)',
             }
           }
-        });
-      }, []);
-      return React.createElement('canvas', { id: 'usageChart', className: 'w-full h-40' });
-    }
-
-    const Section = ({ children, className }) => (
-      React.createElement(motion.section, {
-        className: `p-6 border border-red-600/50 rounded-xl bg-gray-900/40 backdrop-blur-sm ${className || ''}`,
-        initial: { opacity: 0, y: 50 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true },
-        transition: { duration: 0.6 }
-      }, children)
-    );
-
-    const App = () => (
-      React.createElement('main', { className: 'min-h-screen text-white p-4 space-y-6' },
-        React.createElement('header', { className: 'text-center py-20' },
-          React.createElement('h1', { className: 'text-5xl md:text-7xl font-extrabold mb-2 text-[#E31937]' }, '智办助手'),
-          React.createElement('p', { className: 'text-xl tracking-widest text-gray-300' }, 'SmartWork Assistant')
-        ),
-        React.createElement('div', { className: 'grid grid-cols-1 md:grid-cols-2 gap-6' },
-          React.createElement(Section, null,
-            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '应用描述'),
-            React.createElement('p', { className: 'text-lg leading-relaxed text-gray-300' },
-              '智办助手是一款为企业量身打造的人工智能办公应用，旨在提高团队协作效率和自动化处理日常事务。它整合日程管理、文档协作和智能分析等功能，可与现有的办公软件无缝衔接，帮助员工在一个统一的平台上完成任务。'
-            )
-          ),
-          React.createElement(Section, null,
-            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '使用步骤'),
-            React.createElement('ul', { className: 'list-disc pl-5 space-y-1 text-lg text-gray-300' },
-              steps.map((s, i) => React.createElement('li', { key: i }, s))
-            )
-          ),
-          React.createElement(Section, null,
-            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '管理员'),
-            React.createElement('div', { className: 'flex items-center space-x-2 text-lg text-gray-300' },
-              React.createElement('i', { className: 'fas fa-user-tie text-[#E31937]' }),
-              React.createElement('span', null, '陈主管 (Supervisor Chen)')
-            )
-          ),
-          React.createElement(Section, null,
-            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '访问链接'),
-            React.createElement('a', { href: 'https://office-ai.example.com', target: '_blank', className: 'text-[#E31937] underline' }, 'https://office-ai.example.com')
-          ),
-          React.createElement(Section, { className: 'md:col-span-2 flex flex-col items-center' },
-            React.createElement('h2', { className: 'text-3xl font-bold text-[#E31937] mb-2' }, '使用数据'),
-            React.createElement(ChartComponent)
-          )
-        ),
-        React.createElement('footer', { className: 'text-center py-6 text-gray-500 text-sm' }, '© 2025 智办助手')
-      )
-    );
-
-    ReactDOM.render(React.createElement(App), document.getElementById('root'));
-  </script>
+        }
+      }
+    </script>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/11.2.10/motion.umd.min.js" integrity="sha512-qVFN66vTNxuD2ZgB3TjZgL73MvB4yX9XmTOQjTu9qL6kF2zL5XjB5Fw/uLzM0Zg+bM4LzPZ3/zH3kSjRzLg4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-color: #000000;
+            color: white; /* Default text color for visibility on black background */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-3 gap-4 p-4 w-full max-w-5xl mx-auto">
+        <!-- Item 1: Spans 2 columns, Tesla Red border with inner glow -->
+        <div class="bento-item md:col-span-2 md:row-span-1 bg-neutral-900 border-2 border-tesla-red p-6 rounded-lg flex flex-col justify-center shadow-glow-tesla-red-light">
+            <div class="flex items-center">
+                <i class="fas fa-chart-bar text-tesla-red text-3xl mr-4"></i>
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white">全局概览</h2>
+                    <p class="text-base text-gray-400 font-light ml-1">Global Overview & Key Metrics</p>
+                </div>
+            </div>
+        </div>
+        <!-- Item 2: Regular size, neutral background - updated with icon -->
+        <div class="bento-item md:col-span-1 md:row-span-1 bg-neutral-900 border border-gray-700 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+            <i class="fas fa-cogs text-3xl text-gray-400 mb-2"></i>
+            <p class="text-sm text-gray-300">系统状态 / System Status</p>
+        </div>
+        <!-- Item 3: Regular size, Tesla Red border - updated with icon -->
+        <div class="bento-item md:col-span-1 md:row-span-1 bg-neutral-900 border-2 border-tesla-red p-6 rounded-lg flex flex-col justify-center items-center text-center">
+            <i class="fas fa-lightbulb text-tesla-red text-4xl mb-2"></i>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white">创新</h3>
+            <p class="text-sm text-gray-400 mt-1">Innovation</p>
+        </div>
+        <!-- Item 4: Spans 2 columns and 2 rows, Tesla Red gradient background - updated with icon -->
+        <div class="bento-item md:col-span-2 md:row-span-2 bg-gradient-to-br from-tesla-red to-black text-white p-4 md:p-6 rounded-lg flex flex-col justify-center items-center text-center">
+            <p class="text-5xl sm:text-6xl md:text-7xl font-bold">750<span class="text-3xl sm:text-4xl md:text-5xl"> GW</span></p>
+            <div class="flex items-center mt-2">
+                <i class="fas fa-broadcast-tower text-white text-2xl mr-2"></i>
+                <p class="text-xl font-light">全球部署 Global Deployment</p>
+            </div>
+        </div>
+        <!-- Item 5: Spans 1 column and 2 rows, neutral background - updated with icon -->
+        <div class="bento-item md:col-span-1 md:row-span-2 bg-neutral-900 border border-gray-700 p-6 rounded-lg flex flex-col justify-between">
+            <div>
+                <div class="flex items-center mb-2">
+                    <i class="fas fa-comments text-tesla-red text-2xl mr-3"></i>
+                    <h3 class="text-2xl font-bold text-white">用户反馈</h3>
+                </div>
+                <p class="text-sm text-gray-400 font-light ml-[calc(1.5rem+0.75rem)]">User Feedback Analysis</p>
+            </div>
+            <div>
+                <p class="text-3xl sm:text-4xl font-bold text-tesla-red">4.8<span class="text-xl sm:text-2xl text-gray-300">/5</span></p>
+                <p class="text-xs text-gray-500">满意度指数 Satisfaction Index</p>
+            </div>
+        </div>
+        <!-- Item 6: Regular size, neutral background - updated with icon -->
+        <div class="bento-item md:col-span-1 md:row-span-1 bg-neutral-900 border border-gray-700 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+            <i class="fas fa-bell text-3xl text-gray-400 mb-2"></i>
+            <p class="text-sm text-gray-300">通知中心 / Notifications</p>
+        </div>
+    </div>
+    <div style="height: 50vh;"></div>
+    <div style="height: 50vh;"></div>
 </body>
 </html>
